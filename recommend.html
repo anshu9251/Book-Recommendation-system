@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .navbar {
+            background-color: #00a65a;
+        }
+        .navbar-brand {
+            color: #ffffff;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #c3e6cb;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #1f1f1f;
+            border: none;
+        }
+        .card-img-top {
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            height: 400px;
+            object-fit: contain;
+            width: 100%;
+        }
+        .card-body {
+            color: #ffffff;
+        }
+        .form-control {
+            background-color: #333333;
+            border: 1px solid #555555;
+            color: #ffffff;
+        }
+        .form-control:focus {
+            background-color: #444444;
+            border-color: #00a65a;
+            color: #ffffff;
+        }
+        .btn-warning {
+            background-color: #ffcc00;
+            border-color: #ffcc00;
+        }
+        .btn-warning:hover {
+            background-color: #ffb700;
+            border-color: #ffb700;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">My Book Recommender</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/recommend">Recommend</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center" style="font-size:50px; margin-top: 20px;">Recommend Books</h1>
+                <form action="/recommend_books" method="post" class="text-center">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter book name or genre"><br>
+                    <input type="submit" class="btn btn-lg btn-warning" value="Get Recommendations">
+                </form>
+            </div>
+
+            {% if data %}
+                {% for i in data %}
+                <div class="col-md-3" style="margin-top:50px">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ i[2] }}" alt="Book cover">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i[0] }}</h5>
+                            <p class="card-text">{{ i[1] }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
